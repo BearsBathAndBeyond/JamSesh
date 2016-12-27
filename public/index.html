@@ -11,7 +11,7 @@
   <div id='app'>
     <!-- everything here hopefully -->
   </div>
-  <!-- Firebase -->
+
   <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -23,8 +23,15 @@
       messagingSenderId: "1075179288391"
     };
     firebase.initializeApp(config);
+
+    var root = firebase.database().ref();
+
+    root.on('value', function(snap) {
+      console.log(snap.key, snap.val());
+    });
   </script>
-  <!-- Firebase -->
+
+
 
   <script src="compiled/public/components/nav.js"></script>
   <script src="compiled/public/components/landing.js"></script>
