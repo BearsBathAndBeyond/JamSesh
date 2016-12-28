@@ -1,5 +1,2 @@
-.eslint*
-**/node_modules
-**/bower_components
-**/lib
-**/compiled
+app/bundle.js
+
