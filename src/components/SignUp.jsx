@@ -1,6 +1,4 @@
 import React from 'react';
-import firebase from 'firebase';
-import firebaseConfig from '../firebaseConfig';
 import Validation from 'react-validation';
 import validator from 'validator';
 import { Link } from 'react-router';
@@ -9,20 +7,17 @@ import { Link } from 'react-router';
 Object.assign(Validation.rules, {
   required: {
     rule: value => value.toString().trim(),
-    hint: () => <span className="form-error is-visible">Required</span>,
+    hint: () => <div className="form-error is-visible alert-danger">This field is required!</div>,
   },
   email: {
     rule: value => validator.isEmail(value),
-    hint: value => <span className="form-error is-visible">{value} isnt an Email.</span>,
+    hint: value => <div className="form-error is-visible alert-danger">{value} isnt a valid email address!</div>,
   },
 });
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firebaseApp: firebase.initializeApp(firebaseConfig),
-    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -34,15 +29,15 @@ class SignUp extends React.Component {
       email: event.target.email.value,
       password: event.target.password.value,
     };
-    //TODO: update with proper firebase path and auth
+    // TODO: update with proper firebase path and auth
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h3>Sign Up</h3>
         <Validation.components.Form onSubmit={this.handleSubmit}>
-          <div>
+          <div className="form-group">
             <Validation.components.Input
               className="form-control"
               value=""
@@ -51,7 +46,7 @@ class SignUp extends React.Component {
               validations={['required']}
             />
           </div>
-          <div>
+          <div className="form-group">
             <Validation.components.Input
               className="form-control"
               value=""
@@ -60,7 +55,7 @@ class SignUp extends React.Component {
               validations={['required', 'email']}
             />
           </div>
-          <div>
+          <div className="form-group">
             <Validation.components.Input
               className="form-control"
               value=""
@@ -69,15 +64,14 @@ class SignUp extends React.Component {
               validations={['required']}
             />
           </div>
-          <div>
-            <Validation.components.Button className="btn btn-default btn-block">
+          <div className="form-group">
+            <Validation.components.Button className="btn btn-default col-md-2">
             Sign Up</Validation.components.Button>
           </div>
         </Validation.components.Form>
-        <div>
+        <div className="col-md-6 text-center">
           Already a member? <Link to="sign-in">Sign in!</Link>
         </div>
-
       </div>
     );
   }

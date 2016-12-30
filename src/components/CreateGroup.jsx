@@ -1,23 +1,20 @@
 import React from 'react';
-import firebase from 'firebase';
-import firebaseConfig from '../firebaseConfig';
+// import firebase from 'firebase';
+// import firebaseConfig from '../firebaseConfig';
 import Validation from 'react-validation';
+// import Navbar from './Navbar.jsx';
 // import validator from 'validator';
-// import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 Object.assign(Validation.rules, {
   required: {
     rule: value => value.toString().trim(),
-    hint: () => <span className="form-error is-visible">Required</span>,
+    hint: () => <div className="form-error is-visible alert-danger">This field is required!</div>,
   },
 });
 
 class CreateGroup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firebaseApp: firebase.initializeApp(firebaseConfig),
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -30,12 +27,13 @@ class CreateGroup extends React.Component {
       avail: event.target.avail.value,
       details: event.target.details.value,
     };
-    this.state.firebaseApp.database().ref(`groups/${event.target.name.value}`).push(newGroup);
+    this.props.firebaseApp.database().ref(`groups/${event.target.name.value}`).push(newGroup);
+    browserHistory.push('/');
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h3>Create Group</h3>
         <Validation.components.Form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -56,7 +54,7 @@ class CreateGroup extends React.Component {
               validations={['required']}
             />
           </div>
-          <div>
+          <div className="form-group">
             <Validation.components.Input
               className="form-control"
               value=""
@@ -65,7 +63,7 @@ class CreateGroup extends React.Component {
               validations={['required']}
             />
           </div>
-          <div>
+          <div className="form-group">
             <Validation.components.Input
               className="form-control"
               value=""
@@ -74,8 +72,8 @@ class CreateGroup extends React.Component {
               validations={['required']}
             />
           </div>
-          <div>
-            <Validation.components.Input
+          <div className="form-group">
+            <Validation.components.Textarea
               className="form-control"
               value=""
               placeholder="Details"
