@@ -55,6 +55,7 @@
     "eslint-plugin-import": "^1.10.0",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-react": "^5.2.2",
+    "image-webpack-loader": "^3.1.0",
     "jsdom": "^9.8.3",
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.4.1",

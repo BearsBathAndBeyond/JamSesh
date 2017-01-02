@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import Validation from 'react-validation';
 import validator from 'validator';
 import { Link, browserHistory } from 'react-router';
+import Logo from './jamsesh.png';
 
 Object.assign(Validation.rules, {
   required: {
@@ -76,7 +77,7 @@ class SignUp extends React.Component {
     return (
       <div className="container">
         <h3>Sign Up</h3>
-        <Validation.components.Form onSubmit={this.handleSubmit}>
+        <Validation.components.Form onSubmit={this.handleSubmit} className="col-md-8">
           <div className="form-group">
             <Validation.components.Input
               className="form-control"
@@ -112,6 +113,9 @@ class SignUp extends React.Component {
         </Validation.components.Form>
         <div className="col-md-6 text-center">
           Already a member? <Link to="sign-in">Sign in!</Link>
+        </div>
+        <div>
+          <img alt="JamSesh" style={this.imgStyle} className="col-md-4 pull-right" src={Logo} />
         </div>
       </div>
     );
