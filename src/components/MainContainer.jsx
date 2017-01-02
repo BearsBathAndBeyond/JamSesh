@@ -9,13 +9,17 @@ class MainContainer extends React.Component {
     this.state = {
       firebaseApp: firebase.initializeApp(firebaseConfig),
     };
+    this.logOut = this.logOut.bind(this);
   }
-
+  logOut() {
+    firebase.auth().signOut();
+    this.forceUpdate();
+  }
   render() {
     const clonedChildren = React.cloneElement(this.props.children, { firebaseApp: this.state.firebaseApp });
     return (
       <div className="container">
-        <Navbar />
+        <Navbar logOut={this.logOut} />
         {clonedChildren}
       </div>
     );
